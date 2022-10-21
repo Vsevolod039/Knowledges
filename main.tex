@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[russian]{babel}
+\usepackage[left=2cm,right=2cm,
+top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage[utf8]{inputenc}
+\renewcommand{\baselinestretch}{1.5}
+
+\title{Все обо всем}
+\author{Винницкий Всеволод}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Git}
+\subsection{Работа с GitHub}
+Чтобы залить pull-request в репозитарий с GitHub (и это репозитарий не ваш!) то для начала, этот репозитарий необходимо склонировать себе: например нажать fork и в своем акаунте GitHub появится копия репозитария. (Если у пользователя CustomI был репозитарий rep, то после форка у нас появится репозитарий с именем My\_name/rep). \\
+После того как репозитарий форкнут, можно его склонировать себе на машину. Склонировать можно двумя способами: по HTTPS или по SSH. От этих двух подходов зависит по какому протоколу будут данные "передаваться" с нашей локальной машины в удаленный репозитарий на GitHub.
+Команды для клонирования:
+\begin{itemize}
+\item SSH : git@github.com:My\_name/rep.git
+\item HTTPS : https://github.com/My\_name/rep.git
+\end{itemize}
+
+Эти команды можно не запоминать, а посмотреть в браузере нажав в репозитарии на кнопку code. Клонирование осуществляется командой:
+\\
+\\
+\fbox {git clone COMMAND}
+\\
+\\
+COMMAND - это одна из команд для SSH/HTTPS. Теперь репозитарий есть у нас локально!
+\\
+Как запушить на GitHub?
+По SSH (эти действия нужно делать один раз для пары (аккаунт на GitHub, компьютер)). 
+
+\begin{itemize}
+\item Генерируем два ключа: открытый и секретный. Команда:
+\\
+\fbox {ssh-keygen -t rsa -b 4096 -C <<your\_email@example.com>>}
+\item далее жмем enter, все значения будут проставлены по дефолту. После чего в каталоге /Users/you/.ssh/id\_rsa будет создано да файла: id\_rsa id\_rsa.pub (собственно секретный и публичный ключ).
+
+\item Далее запускаем SSH-агента:
+\\
+\fbox {eval <<\$(ssh-agent -s)>>}
+\\
+и добавляем в него ключ командой:
+\\
+\fbox {ssh-add ~/.ssh/id\_rsa}
+\item Осталось добавить публичный ключ в свой аккаунт на GitHub: для этого из аккаунта переходим в settings, далее в SSH and GPG keys. Добавляем публичный ключ.
+\end{itemize}
+
+Теперь можно делать пуш: 
+\fbox {git push git@github.com:My\_name/rep.git}
+
+\end{document}
